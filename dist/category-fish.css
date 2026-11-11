@@ -2,13 +2,13 @@
 .category-showcase{padding:22px 0 18px;background:transparent;border:0;direction:ltr}
 .category-track{display:flex;gap:0;width:max-content;direction:ltr;animation:categorySeamless var(--marquee-duration,28s) linear infinite;will-change:transform}
 .category-track:hover{animation-play-state:running}
-.category-group{display:flex;align-items:flex-start;flex:none;width:max-content;gap:12px;padding:0 6px}
-.category-chip,.category-chip.active{direction:rtl;display:flex;flex:0 0 92px;flex-direction:column;align-items:center;gap:8px;width:92px;min-width:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;text-align:center;color:#eef3ed}
-.category-orb{display:block;width:72px;height:72px;overflow:hidden;border:1px solid rgba(241,220,172,.35);border-radius:50%;background:#15382f;box-shadow:0 11px 24px rgba(0,0,0,.3),inset 0 0 0 3px rgba(255,255,255,.04);transition:transform .2s,border-color .2s}
+.category-group{display:flex;align-items:flex-start;flex:none;width:max-content;gap:13px;padding:0 7px}
+.category-chip,.category-chip.active{direction:rtl;display:flex;flex:0 0 116px;flex-direction:column;align-items:center;gap:9px;width:116px;min-width:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;text-align:center;color:#eef3ed}
+.category-orb{display:block;width:94px;height:94px;overflow:hidden;border:1px solid rgba(241,220,172,.35);border-radius:50%;background:#15382f;box-shadow:0 11px 24px rgba(0,0,0,.3),inset 0 0 0 3px rgba(255,255,255,.04);transition:transform .2s,border-color .2s}
 .category-chip:hover .category-orb{transform:translateY(-3px);border-color:#efd399}
 .category-chip.active .category-orb{outline:2px solid #dfbc71;outline-offset:3px}
 .category-orb img,.category-chip img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
-.category-chip b{display:block;max-width:92px;min-height:32px;color:#e8eee9;font-size:11px;line-height:1.25;white-space:normal;text-wrap:balance}
+.category-chip b{display:block;max-width:116px;min-height:34px;color:#e8eee9;font-size:12px;line-height:1.25;white-space:normal;text-wrap:balance}
 @keyframes categorySeamless{to{transform:translate3d(var(--cycle-distance,-756px),0,0)}}
 
 /* Let the textured animated fish inhabit the section without a visible box. */
@@ -17,5 +17,12 @@
 .fish-swim{position:absolute;inset:7% 2% 12%;will-change:transform}
 .fish-model{width:100%;height:100%;animation:none;filter:saturate(1.05) contrast(1.04) drop-shadow(0 24px 17px rgba(0,0,0,.25));--poster-color:transparent}
 .fish-caption{z-index:2}.fish-caption span a{color:#e4d09d;text-decoration:underline;text-underline-offset:2px}
-@media(max-width:640px){.category-showcase{padding:18px 0 14px}.category-group{gap:10px;padding:0 5px}.category-chip,.category-chip.active{flex-basis:84px;width:84px}.category-orb{width:66px;height:66px}.category-chip b{max-width:84px;min-height:29px;font-size:10px}.fish-stage{height:335px;border-radius:46% 54% 52% 48%/52% 46% 54% 48%}.fish-swim{inset:4% 1% 12%}.fish-caption span{font-size:9px}}
+.brand img,.footer-brand img{object-fit:contain;object-position:center;border-radius:0;background:transparent}
+.brand img{width:56px;height:56px}
+.footer-brand img{width:70px;height:70px}
+.designer-credit{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:9px 13px;border:1px solid rgba(223,188,113,.24);border-radius:12px;color:#e4c986;font-size:12px;font-weight:700;line-height:1.5;text-align:center;text-decoration:none;white-space:normal;transition:background .2s,border-color .2s}
+.designer-credit:hover,.designer-credit:focus-visible{background:rgba(223,188,113,.1);border-color:#dfbc71;color:#f4daa0}
+.designer-credit:focus-visible{outline:2px solid #f4daa0;outline-offset:3px}
+@media(max-width:640px){.category-showcase{padding:20px 0 16px}.category-group{gap:11px;padding:0 6px}.category-chip,.category-chip.active{flex-basis:100px;width:100px}.category-orb{width:82px;height:82px}.category-chip b{max-width:100px;min-height:32px;font-size:11px}.brand img{width:47px;height:50px}.footer-brand img{width:62px;height:62px}.fish-stage{height:335px;border-radius:46% 54% 52% 48%/52% 46% 54% 48%}.fish-swim{inset:4% 1% 12%}.fish-caption span{font-size:9px}}
+@media(max-width:640px){.designer-credit{margin-top:18px;width:100%;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.category-track{animation:none}.fish-swim{transform:none!important}}
