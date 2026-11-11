@@ -9,8 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" href="assets/hero-poster.jpg" as="image">
+  <link rel="preload" href="assets/hero-11-poster.jpg" as="image">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="video-layout.css">
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -30,8 +31,8 @@
 
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-hidden="true">
-        <source src="assets/baker.mp4" type="video/mp4">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-11-poster.jpg" aria-hidden="true">
+        <source src="assets/hero-11.mp4" type="video/mp4">
       </video>
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-sheen" aria-hidden="true"></div>
@@ -62,6 +63,13 @@
         </a>
       </div>
     </section>
+
+    <div class="section-video-backdrop" id="sectionVideoBackdrop" aria-hidden="true">
+      <video id="sectionVideo" muted loop playsinline preload="none" poster="assets/sections-12-poster.jpg">
+        <source src="assets/sections-12.mp4" type="video/mp4">
+      </video>
+      <div class="section-video-shade"></div>
+    </div>
 
     <section class="intro section-pad" id="story" aria-labelledby="story-title">
       <div class="container intro-grid">

@@ -28,12 +28,17 @@ const cartCount = document.getElementById('cartCount');
 const cartTotal = document.getElementById('cartTotal');
 const checkoutMessage = document.getElementById('checkoutMessage');
 const heroVideo = document.querySelector('.hero-video');
+const heroSection = document.querySelector('.hero');
+const sectionBackdrop = document.getElementById('sectionVideoBackdrop');
+const sectionVideo = document.getElementById('sectionVideo');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const videoToggle = document.getElementById('videoToggle');
 const videoToggleIcon = document.getElementById('videoToggleIcon');
 const videoToggleText = document.getElementById('videoToggleText');
 const cart = new Map();
 let activeCategory = 'all';
 let previousFocus = null;
+let heroUserPaused = false;
 
 function renderCategories() {
   categoryList.innerHTML = categories.map(([key, label]) =>
@@ -124,14 +129,16 @@ renderCart();
 
 function syncVideoButton() {
   const playing = !heroVideo.paused;
-  videoToggle.setAttribute('aria-label', playing ? 'إيقاف فيديو الخباز' : 'تشغيل فيديو الخباز');
+  videoToggle.setAttribute('aria-label', playing ? 'إيقاف فيديو الهيرو' : 'تشغيل فيديو الهيرو');
   videoToggleIcon.textContent = playing ? 'Ⅱ' : '▶';
   videoToggleText.textContent = playing ? 'إيقاف الفيديو' : 'شاهد الخباز';
 }
 videoToggle.addEventListener('click', async () => {
   if (heroVideo.paused) {
+    heroUserPaused = false;
     try { await heroVideo.play(); } catch { videoToggleText.textContent = 'تعذر تشغيل الفيديو'; }
   } else {
+    heroUserPaused = true;
     heroVideo.pause();
   }
   syncVideoButton();
@@ -139,6 +146,42 @@ videoToggle.addEventListener('click', async () => {
 heroVideo.addEventListener('play', syncVideoButton);
 heroVideo.addEventListener('pause', syncVideoButton);
 syncVideoButton();
+
+function syncScrollVideos() {
+  const heroRect = heroSection.getBoundingClientRect();
+  const onScreen = heroRect.bottom > 0 && heroRect.top < window.innerHeight;
+  const sectionsVisible = heroRect.bottom <= window.innerHeight * .92 &&
+    document.querySelector('main').getBoundingClientRect().bottom > 0;
+  const canAnimate = !reducedMotion.matches && !document.hidden;
+
+  if (onScreen && canAnimate && !heroUserPaused && heroVideo.paused) {
+    heroVideo.play().catch(() => {});
+  } else if ((!onScreen || !canAnimate) && !heroVideo.paused) {
+    heroVideo.pause();
+  }
+
+  sectionBackdrop.classList.toggle('active', sectionsVisible);
+  if (sectionsVisible && canAnimate && sectionVideo.paused) {
+    sectionVideo.play().catch(() => {});
+  } else if ((!sectionsVisible || !canAnimate) && !sectionVideo.paused) {
+    sectionVideo.pause();
+  }
+}
+
+let videoScrollQueued = false;
+function queueScrollVideoSync() {
+  if (videoScrollQueued) return;
+  videoScrollQueued = true;
+  requestAnimationFrame(() => {
+    videoScrollQueued = false;
+    syncScrollVideos();
+  });
+}
+window.addEventListener('scroll', queueScrollVideoSync, { passive: true });
+window.addEventListener('resize', queueScrollVideoSync);
+document.addEventListener('visibilitychange', queueScrollVideoSync);
+reducedMotion.addEventListener('change', queueScrollVideoSync);
+queueScrollVideoSync();
 
 const revealItems = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

@@ -1,0 +1,86 @@
+/* The hero occupies one viewport; the second film stays behind scrolling sections. */
+main {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero {
+  z-index: 2;
+  height: 100vh;
+  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
+  max-height: none;
+  background: #0b211c url('assets/hero-11-poster.jpg') center / cover;
+}
+
+.hero-video {
+  object-position: center;
+}
+
+.hero-shade {
+  background:
+    linear-gradient(270deg, rgba(3, 17, 14, .9), rgba(3, 17, 14, .62) 48%, rgba(3, 17, 14, .28)),
+    linear-gradient(0deg, #071c18 1%, transparent 30%);
+}
+
+.section-video-backdrop {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .45s ease;
+  background: #071c18 url('assets/sections-12-poster.jpg') center / cover;
+}
+
+.section-video-backdrop.active {
+  opacity: 1;
+}
+
+.section-video-backdrop video {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.section-video-shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 17, 13, .23);
+}
+
+.intro,
+.menu-section,
+.journey,
+.preview-section,
+.visit {
+  position: relative;
+  z-index: 1;
+}
+
+.intro { background: rgba(5, 24, 19, .43); }
+.menu-section { background: rgba(5, 24, 19, .53); }
+.journey { background: rgba(5, 24, 19, .48); color: var(--cream); }
+.preview-section { background: rgba(5, 24, 19, .56); }
+.visit { background: rgba(5, 24, 19, .43); }
+.journey .section-kicker { color: var(--gold); }
+.journey-heading p:last-child { color: #c9d6ca; }
+
+.footer {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 800px) {
+  .hero-video { object-position: 55% center; }
+  .section-video-backdrop video { object-position: 54% center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-video-backdrop { transition: none; }
+  .section-video-backdrop video { display: none; }
+}
