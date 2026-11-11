@@ -55,7 +55,6 @@ main {
 
 .intro,
 .menu-section,
-.journey,
 .preview-section,
 .visit {
   position: relative;
@@ -64,20 +63,40 @@ main {
 
 .intro { background: rgba(5, 24, 19, .43); }
 .menu-section { background: rgba(5, 24, 19, .53); }
-.journey { background: rgba(5, 24, 19, .48); color: var(--cream); }
 .preview-section { background: rgba(5, 24, 19, .56); }
 .visit { background: rgba(5, 24, 19, .43); }
-.journey .section-kicker { color: var(--gold); }
-.journey-heading p:last-child { color: #c9d6ca; }
 
 .footer {
   position: relative;
   z-index: 2;
 }
 
+/* Show the supplied QR pixels over the old code on the photographed stand. */
+.visit-qr {
+  position: absolute;
+  z-index: 4;
+  top: 11%;
+  left: 29%;
+  width: 54%;
+  height: 55%;
+  padding: 22px;
+  background: #fff;
+  outline: 7px solid #c9a567;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .35);
+}
+
+.visit-qr img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: none;
+}
+
 @media (max-width: 800px) {
   .hero-video { object-position: 55% center; }
   .section-video-backdrop video { object-position: 54% center; }
+  .visit-qr { top: 11%; padding: 18px; outline-width: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
